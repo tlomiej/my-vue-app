@@ -2,17 +2,20 @@
   <img alt="Vue logo" src="./assets/logo.png">
 <HelloWorld msg="Welcome to Your Vue.js App"/> 
 <FirstComp msg="Nazwa przycisku"></FirstComp>
+<VueFor></VueFor>
 
 
 </template>
 
 <script>
 import FirstComp from './components/FirstComp.vue'
+import VueFor from './components/VueFor.vue'
 
 export default {
   name: 'App',
   components: {
-    FirstComp
+    FirstComp,
+    VueFor
   }
 }
 </script>
