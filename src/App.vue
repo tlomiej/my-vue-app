@@ -1,26 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-<HelloWorld msg="Welcome to Your Vue.js App"/> 
-<FirstComp msg="Nazwa przycisku"></FirstComp>
-<VueFor></VueFor>
-<DynamicBindings></DynamicBindings>
-
-
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <FirstComp msg="Nazwa przycisku"></FirstComp>
+  <VueFor></VueFor>
+  <DynamicBindings></DynamicBindings>
 </template>
 
 <script>
-import FirstComp from './components/FirstComp.vue'
-import VueFor from './components/VueFor.vue'
-import DynamicBindings from './components/DynamicBindings.vue'
+import FirstComp from "./components/FirstComp.vue";
+import VueFor from "./components/VueFor.vue";
+import DynamicBindings from "./components/DynamicBindings.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     FirstComp,
     VueFor,
-    DynamicBindings
-  }
-}
+    DynamicBindings,
+  },
+};
 </script>
 
 <style>
