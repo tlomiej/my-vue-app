@@ -3,6 +3,7 @@
 <HelloWorld msg="Welcome to Your Vue.js App"/> 
 <FirstComp msg="Nazwa przycisku"></FirstComp>
 <VueFor></VueFor>
+<DynamicBindings></DynamicBindings>
 
 
 </template>
@@ -10,12 +11,14 @@
 <script>
 import FirstComp from './components/FirstComp.vue'
 import VueFor from './components/VueFor.vue'
+import DynamicBindings from './components/DynamicBindings.vue'
 
 export default {
   name: 'App',
   components: {
     FirstComp,
-    VueFor
+    VueFor,
+    DynamicBindings
   }
 }
 </script>
