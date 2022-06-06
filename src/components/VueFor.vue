@@ -6,18 +6,21 @@ export default {
         { message: "Foo" },
         { message: "Bar" },
         { message: "Bar1" },
-        { message: "Bar1" },
+        { message: "Bar222" },
       ],
+      created: [],
     };
   },
 
-  async created() {
-    // GET request using fetch with async/await
+  async mounted() {
     const response = await fetch("https://api.npms.io/v2/search?q=polymer");
     const data = await response.json();
     console.log(data);
-    return data.results;
-    //this.totalVuePackages = data.total;
+    this.created = await data.results;
+
+    // fetch("https://api.npms.io/v2/search?q=polymer1")
+    //   .then((res) => res.json())
+    //   .then((data) => (this.created = data.results));
   },
 };
 </script>
@@ -30,5 +33,6 @@ export default {
   <li v-for="(item, index) in created" :key="item.id">
     {{ index }} - {{ item.package.name }}
   </li>
+  {{ JSON.stringify(this.created) + "   aaaa" }}
 </template>
 
