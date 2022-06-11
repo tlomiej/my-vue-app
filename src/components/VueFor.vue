@@ -26,6 +26,18 @@ export default {
 </script>
 
 <template>
+ <b-button size="sm" @click="toggle">
+    {{ show ? 'Hide' : 'Show' }} Alert
+  </b-button>
+  <b-alert
+    v-model="show"
+    class="mt-3"
+    dismissible
+    @dismissed="dismissed"
+  >
+    Hello {{ name }}!
+  </b-alert>
+  
   <li v-for="(item, index) in items" :key="item.id">
     {{ index }} - {{ item.message }}
   </li>

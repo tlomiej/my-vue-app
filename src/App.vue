@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <HelloWorld></HelloWorld>
   <FirstComp msg="Nazwa przycisku"></FirstComp>
   <VueFor></VueFor>
   <DynamicBindings></DynamicBindings>
@@ -10,6 +10,7 @@
 import FirstComp from "./components/FirstComp.vue";
 import VueFor from "./components/VueFor.vue";
 import DynamicBindings from "./components/DynamicBindings.vue";
+import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
   name: "App",
@@ -17,6 +18,7 @@ export default {
     FirstComp,
     VueFor,
     DynamicBindings,
+    HelloWorld,
   },
 };
 </script>
