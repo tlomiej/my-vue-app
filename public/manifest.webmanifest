@@ -2,6 +2,14 @@
     "name" : "Aplikacja vue 1",
     "short_name": "Vue",
     "display" : "fullscreen",
-    "url": "."
+    "start_url": "/index.html",
+    "icons": [
+        {
+          "src": "app512x512.jpg",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+
+      ]
 
 }
