@@ -3,14 +3,29 @@
     PROJ4
 
     <vaadin-button @click="showCoords">Coords</vaadin-button>
+    <vaadin-form-layout>
+      <vaadin-combo-box
+        label="Country"
+        item-label-path="name"
+        item-value-path="id"
+        .items="projections"
+      ></vaadin-combo-box>
+    </vaadin-form-layout>
   </div>
 </template>
 
 <script>
 import "@vaadin/vaadin-button";
+import "@vaadin/vaadin-form-layout";
+
 import Proj4 from "proj4";
 
 export default {
+  data() {
+    return {
+      projections: [{code: 'EPSG: 4326', name: "Geograficzny"}]
+    }
+  },
   name: "ProjectElement",
   methods: {
     showCoords: () => {
