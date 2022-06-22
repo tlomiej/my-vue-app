@@ -1,30 +1,40 @@
 <template>
   <div class="component">
-    PROJ4
-
-    <vaadin-button @click="showCoords">Coords</vaadin-button>
     <vaadin-form-layout>
+      <vaadin-text-area label="Geometry in"></vaadin-text-area>
+      <vaadin-text-area label="Geometry Out"></vaadin-text-area>
       <vaadin-combo-box
-        label="Country"
+        label="In epsg"
         item-label-path="name"
         item-value-path="id"
-        .items="projections"
+      ></vaadin-combo-box>
+      <vaadin-combo-box
+        label="Out epsg"
+        item-label-path="name"
+        item-value-path="id"
       ></vaadin-combo-box>
     </vaadin-form-layout>
+
+    <br />
+
+    <vaadin-button @click="showCoords">Coords</vaadin-button>
   </div>
 </template>
 
 <script>
 import "@vaadin/vaadin-button";
-import "@vaadin/vaadin-form-layout";
+import "@vaadin/vaadin-text-field/vaadin-text-area";
+import "@vaadin/form-layout";
+import "@vaadin/combo-box";
+
 
 import Proj4 from "proj4";
 
 export default {
   data() {
     return {
-      projections: [{code: 'EPSG: 4326', name: "Geograficzny"}]
-    }
+      projections: [{ code: "EPSG: 4326", name: "Geograficzny" }],
+    };
   },
   name: "ProjectElement",
   methods: {
@@ -52,4 +62,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+ vaadin-text-area {
+    width: 100%;
+    min-height: 200px;
+    max-height: 550px;
+  }
 </style>

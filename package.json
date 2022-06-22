@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.5",
+    "@vaadin/combo-box": "^23.1.1",
+    "@vaadin/form-layout": "^23.1.1",
     "@vaadin/vaadin-button": "^23.1.0",
     "@vaadin/vaadin-grid": "^23.1.0",
     "@vaadin/vaadin-text-field": "^23.1.0",
