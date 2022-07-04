@@ -44,8 +44,11 @@ import Proj4 from "proj4";
 export default {
   data() {
     return {
-      projections: [{ code: "EPSG: 4326", name: "Geograficzny" }],
-      inGeometry: "",
+      projections: [
+        { code: "EPSG: 4326", name: "EPSG: 4326" },
+        { code: "EPSG: 2180", name: "EPSG: 2180" },
+      ],
+      inGeometry: "[2, 5]",
       outGeometry: "",
     };
   },
@@ -63,10 +66,14 @@ export default {
           "EPSG:4269",
           "+title=NAD83 (long/lat) +proj=longlat +a=6378137.0 +b=6356752.31414036 +ellps=GRS80 +datum=NAD83 +units=degrees",
         ],
+        [
+          "EPSG:2180",
+          "+proj=tmerc +lat_0=0 +lon_0=19 +k=0.9993 +x_0=500000 +y_0=-5300000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
+        ],
       ]);
 
       //I'm not going to redefine those two in latter examples.
-      const project = Proj4("EPSG:4326", "EPSG:4269", [2, 5]);
+      const project = Proj4("EPSG:4326", "EPSG:2180", JSON.parse(this.inGeometry));
       console.log(project, "<---");
     },
   },
