@@ -2,23 +2,29 @@
   <div class="component">
     <vaadin-form-layout>
       <vaadin-text-area
-        label="Geometry Out"
+        label="Geometry in"
         :value="inGeometry"
         @input="inGeometry = $event.target.value"
       ></vaadin-text-area>
       <vaadin-text-area
-        label="Geometry in"
+        label="Geometry out"
         :value="outGeometry"
         @input="outGeometry = $event.target.value"
       ></vaadin-text-area>
 
       <vaadin-combo-box
+       placeholder="Select in EPSG"
         label="In epsg"
         item-label-path="name"
         item-value-path="id"
         :items="projections"
+        @change="(e) => {
+                        this.inEpsg = e.target.value;
+
+                    }"
       ></vaadin-combo-box>
       <vaadin-combo-box
+       placeholder="Select out EPSG"
         label="Out epsg"
         item-label-path="name"
         item-value-path="id"
@@ -28,8 +34,10 @@
 
     <br />
 
-    <vaadin-button @click="showCoords">Coords</vaadin-button>
+    <vaadin-button @click="() => {
+      this.outGeometry = showCoords(this.inEpsg, this.inGeometry)}">Coords</vaadin-button>
     {{ this.inGeometry }}
+    {{ this.inEpsg }}
   </div>
 </template>
 
@@ -50,12 +58,14 @@ export default {
       ],
       inGeometry: "[2, 5]",
       outGeometry: "",
+      inEpsg: '',
+      outEpsg: '',
     };
   },
   name: "ProjectElement",
   methods: {
-    showCoords: () => {
-      console.log("cords");
+    showCoords: (inEpsg, inGeometry) => {
+      console.log("cords", inEpsg);
 
       Proj4.defs([
         [
@@ -73,8 +83,9 @@ export default {
       ]);
 
       //I'm not going to redefine those two in latter examples.
-      const project = Proj4("EPSG:4326", "EPSG:2180", JSON.parse(this.inGeometry));
-      console.log(project, "<---");
+      return Proj4(inEpsg, "EPSG:2180", JSON.parse(inGeometry));
+
+
     },
   },
 };
