@@ -13,31 +13,39 @@
       ></vaadin-text-area>
 
       <vaadin-combo-box
-       placeholder="Select in EPSG"
+        placeholder="Select in EPSG"
         label="In epsg"
         item-label-path="name"
-        item-value-path="id"
+        item-value-path="code"
         :items="projections"
-        @change="(e) => {
-                        this.inEpsg = e.target.value;
-
-                    }"
+        required
+        @change="inEpsg = $event.target.selectedItem"
       ></vaadin-combo-box>
       <vaadin-combo-box
-       placeholder="Select out EPSG"
+        placeholder="Select out EPSG"
         label="Out epsg"
         item-label-path="name"
-        item-value-path="id"
+        item-value-path="code"
         :items="projections"
+        required
+        @change="outEpsg = $event.target.selectedItem"
       ></vaadin-combo-box>
     </vaadin-form-layout>
 
     <br />
 
-    <vaadin-button @click="() => {
-      this.outGeometry = showCoords(this.inEpsg, this.inGeometry)}">Coords</vaadin-button>
-    {{ this.inGeometry }}
-    {{ this.inEpsg }}
+    <vaadin-button
+      @click="
+        () => {
+          this.outGeometry = showCoords(
+            this.inEpsg,
+            this.outEpsg,
+            this.inGeometry
+          );
+        }
+      "
+      >Calculate</vaadin-button
+    >
   </div>
 </template>
 
@@ -48,44 +56,29 @@ import "@vaadin/form-layout";
 import "@vaadin/combo-box";
 
 import Proj4 from "proj4";
+import { projections } from "./projections";
 
 export default {
   data() {
     return {
-      projections: [
-        { code: "EPSG: 4326", name: "EPSG: 4326" },
-        { code: "EPSG: 2180", name: "EPSG: 2180" },
-      ],
+      projections,
       inGeometry: "[2, 5]",
       outGeometry: "",
-      inEpsg: '',
-      outEpsg: '',
+      inEpsg: "",
+      outEpsg: "",
     };
   },
   name: "ProjectElement",
   methods: {
-    showCoords: (inEpsg, inGeometry) => {
+    showCoords: (inEpsg, outEpsg, inGeometry) => {
       console.log("cords", inEpsg);
 
       Proj4.defs([
-        [
-          "EPSG:4326",
-          "+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees",
-        ],
-        [
-          "EPSG:4269",
-          "+title=NAD83 (long/lat) +proj=longlat +a=6378137.0 +b=6356752.31414036 +ellps=GRS80 +datum=NAD83 +units=degrees",
-        ],
-        [
-          "EPSG:2180",
-          "+proj=tmerc +lat_0=0 +lon_0=19 +k=0.9993 +x_0=500000 +y_0=-5300000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
-        ],
+        [inEpsg.code, inEpsg.proj],
+        [outEpsg.code, outEpsg.proj],
       ]);
 
-      //I'm not going to redefine those two in latter examples.
-      return Proj4(inEpsg, "EPSG:2180", JSON.parse(inGeometry));
-
-
+      return Proj4(inEpsg.code, outEpsg.code, JSON.parse(inGeometry));
     },
   },
 };
