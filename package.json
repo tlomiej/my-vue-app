@@ -15,6 +15,7 @@
     "@vaadin/vaadin-grid": "^23.1.0",
     "@vaadin/vaadin-text-field": "^23.1.0",
     "core-js": "^3.8.3",
+    "esri-loader": "^3.6.0",
     "proj4": "^2.8.0",
     "vue": "^3.2.13"
   },
